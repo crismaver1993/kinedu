@@ -4,7 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_activities">Activities</string>
+    <string name="tab_text_arcticles">Articles</string>
     <string name="title_activity_main_d">MainDActivity</string>
 </resources>

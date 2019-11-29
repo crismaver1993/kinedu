@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.dot7.kinedu.R
 
 private val TAB_TITLES = arrayOf(
-    R.string.tab_text_1,
-    R.string.tab_text_2
+    R.string.tab_text_activities,
+    R.string.tab_text_arcticles
 )
 
 /**

@@ -1,12 +1,11 @@
-package com.dot7.kinedu.ui.main
+package com.dot7.kinedu.ui.catalogue
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 
-class PageViewModel : ViewModel() {
+class ActivitiesViewModel : ViewModel() {
 
     private val _index = MutableLiveData<Int>()
     val text: LiveData<String> = Transformations.map(_index) {

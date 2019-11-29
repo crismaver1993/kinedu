@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.dot7.kinedu.ui.catalogue.CatalogueFragment"
+        android:name="com.dot7.kinedu.ui.catalogue.ExerciseFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_exercise_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

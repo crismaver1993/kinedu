@@ -15,11 +15,11 @@ import com.dot7.kinedu.R
  */
 class ArticlesFragment : Fragment() {
 
-    private lateinit var pageViewModel: PageViewModel
+    private lateinit var pageViewModel: ArticlesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
+        pageViewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
     }

@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.home
+package com.dot7.kinedu.ui.catalogue
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.dot7.kinedu.ui.home.HomeFragment"
+        android:name="com.dot7.kinedu.ui.catalogue.CatalogueFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 

@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.home
+package com.dot7.kinedu.ui.catalogue
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dot7.kinedu.R
 
-class HomeFragment : Fragment() {
+class CatalogueFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
 

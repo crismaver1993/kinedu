@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.dashboard
+package com.dot7.kinedu.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.catalogue.articles
+package com.dot7.kinedu.catalogue.articles
 
 import android.os.Bundle
 import android.view.LayoutInflater

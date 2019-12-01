@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.catalogue
+package com.dot7.kinedu.ui.catalogue.articles
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,13 +13,13 @@ import com.dot7.kinedu.R
 /**
  * A placeholder fragment containing a simple view.
  */
-class ActivitiesFragment : Fragment() {
+class ArticlesFragment : Fragment() {
 
-    private lateinit var activitiesViewModel: ActivitiesViewModel
+    private lateinit var pageViewModel: ArticlesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activitiesViewModel = ViewModelProviders.of(this).get(ActivitiesViewModel::class.java).apply {
+        pageViewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
     }
@@ -28,9 +28,9 @@ class ActivitiesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_activities, container, false)
-        val textView: TextView = root.findViewById(R.id.tv_section_activities_label)
-        activitiesViewModel.text.observe(this, Observer<String> {
+        val root = inflater.inflate(R.layout.fragment_articles, container, false)
+        val textView: TextView = root.findViewById(R.id.section_label)
+        pageViewModel.text.observe(this, Observer<String> {
             textView.text = it
         })
         return root
@@ -48,8 +48,8 @@ class ActivitiesFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): ActivitiesFragment {
-            return ActivitiesFragment().apply {
+        fun newInstance(sectionNumber: Int): ArticlesFragment {
+            return ArticlesFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }

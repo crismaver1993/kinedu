@@ -7,4 +7,7 @@
     <string name="tab_text_activities">Activities</string>
     <string name="tab_text_arcticles">Articles</string>
     <string name="title_activity_main_d">MainDActivity</string>
+    <string name="image_desc">image_desc</string>
+    <string name="question_how_is_doing">How is fwefew doing in this skill?</string>
+    <string name="label_learn_more">Learn more</string>
 </resources>

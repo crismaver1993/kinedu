@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.notifications
+package com.dot7.kinedu.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

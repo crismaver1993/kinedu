@@ -1,4 +1,4 @@
-package com.dot7.kinedu.ui.notifications
+package com.dot7.kinedu.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

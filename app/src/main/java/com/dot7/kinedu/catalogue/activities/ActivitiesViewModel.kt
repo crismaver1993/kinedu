@@ -1,8 +1,6 @@
-package com.dot7.kinedu.ui.catalogue.activities
+package com.dot7.kinedu.catalogue.activities
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 class ActivitiesViewModel : ViewModel() {

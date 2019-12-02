@@ -1,7 +1,8 @@
 package com.dot7.kinedu.network
 
-import com.dot7.kinedu.models.KineduResponse
-import com.dot7.kinedu.models.MetadataResponse
+import com.dot7.kinedu.models.KineduActivityResponse
+import com.dot7.kinedu.models.KineduArticleDetailResponse
+import com.dot7.kinedu.models.KineduArticleResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -9,32 +10,35 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface KineduService {
-    /**
-     * Activities
-     */
+
+    // ========================================================================================
+    //                                  Activities
+    // ========================================================================================
+
     @Headers("Content-Type: application/json")
     @GET("catalogue/activities")
     fun getActivities(
         @Header("Authorization") authorization: String,
         @Query("skill_id") skillId: String,
         @Query("baby_id") babyId: String
-    ): Call<KineduResponse>
+    ): Call<KineduActivityResponse>
 
-    /**
-     * Articles
-     */
+    // ========================================================================================
+    //                                  Articles
+    // ========================================================================================
+
     @Headers("Content-Type: application/json")
     @GET("catalogue/articles")
     fun getArticles(
         @Header("Authorization") authorization: String,
         @Query("skill_id") skillId: String,
         @Query("baby_id") babyId: String
-    ): Call<KineduResponse>
+    ): Call<KineduArticleResponse>
 
     @Headers("Content-Type: application/json")
     @GET("articles/{article_id}")
     fun getArticleDetail(
         @Header("Authorization") authorization: String,
         @Query("article_id") articleId: String
-    ): Call<KineduResponse>
+    ): Call<KineduArticleDetailResponse>
 }

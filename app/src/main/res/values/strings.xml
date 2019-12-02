@@ -1,16 +1,20 @@
 <resources>
     <string name="app_name">Kinedu</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="tab_text_activities">Activities</string>
-    <string name="tab_text_arcticles">Articles</string>
-    <string name="title_activity_main_d">MainDActivity</string>
+
+    <!--Bottom Navigation-->
+    <string name="title_my_family">My Family</string>
+    <string name="title_my_plan">My Plan</string>
+    <string name="title_catalogue">Catalog</string>
+    <string name="title_progress">Progress</string>
+    <string name="title_milestones">Milestones</string>
+
+    <!-- Generic-->
     <string name="image_desc">image_desc</string>
+
+    <!--Catalogue-->
+    <string name="tab_text_activities">Activities</string>
+    <string name="tab_text_articles">Articles</string>
     <string name="question_how_is_doing">How is fwefew doing in this skill?</string>
     <string name="label_learn_more">Learn more</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,20 +1,29 @@
 package com.dot7.kinedu.catalogue.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dot7.kinedu.BaseFragment
 import com.dot7.kinedu.R
+import com.dot7.kinedu.models.KineduResponse
+import com.dot7.kinedu.models.MetadataResponse
+import com.dot7.kinedu.util.KineduConstants
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * Show all activities for the exercise selected
  */
-class ActivitiesFragment : Fragment() {
+class ActivitiesFragment : BaseFragment() {
     private lateinit var activitiesViewModel: ActivitiesViewModel
-
+    private lateinit var rvActivities: RecyclerView
+    private lateinit var activitiesAdapter: ActivitiesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initAll()
@@ -44,8 +53,42 @@ class ActivitiesFragment : Fragment() {
      * @param rootView instance of the current view inflated
      */
     private fun initViews(rootView: View) {
-        val rvActivities: RecyclerView = rootView.findViewById(R.id.rv_activities)
+        this@ActivitiesFragment.context?.let { mContext ->
+            rvActivities = rootView.findViewById(R.id.rv_activities)
+            activitiesAdapter = ActivitiesAdapter(mContext)
+            if (isOnline(mContext)) {
+                val call = apiService?.getActivities(
+                    KineduConstants.TOKEN,
+                    KineduConstants.SKILL_ID,
+                    KineduConstants.BABY_ID
+                )
+                call?.enqueue(object : Callback<KineduResponse> {
+                    override fun onFailure(call: Call<KineduResponse>, t: Throwable) {
+                   Log.v("xxxError", "${t.cause}")
+                    }
 
+                    override fun onResponse(
+                        call: Call<KineduResponse>,
+                        response: Response<KineduResponse>
+                    ) {
+                        showInfo(response)
+                    }
+                })
+            }
+        }
+    }
+
+    private fun showInfo(response: Response<KineduResponse>) {
+        this@ActivitiesFragment.context?.let { mContext ->
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    rvActivities.setHasFixedSize(true)
+                    rvActivities.layoutManager = LinearLayoutManager(mContext)
+                    activitiesAdapter.setListInfo(body.data.activities)
+                }
+            }
+        }
     }
 
     companion object {

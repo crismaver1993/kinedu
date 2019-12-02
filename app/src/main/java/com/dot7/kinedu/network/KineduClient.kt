@@ -1,7 +1,9 @@
 package com.dot7.kinedu.network
 
+import com.dot7.kinedu.BuildConfig
 import com.dot7.kinedu.util.KineduConstants
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -30,9 +32,15 @@ object KineduClient {
      * HttpClient builder to customize our client settings
      */
     private fun getHttpClient(): OkHttpClient.Builder {
-        return OkHttpClient.Builder()
+        val httpClient =  OkHttpClient.Builder()
             .connectTimeout(KineduConstants.THIRTY_SECONDS, TimeUnit.SECONDS)
             .readTimeout(KineduConstants.THIRTY_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(KineduConstants.THIRTY_SECONDS, TimeUnit.SECONDS)
+        if (BuildConfig.DEBUG) {
+            val logging = HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            httpClient.interceptors().add(logging)
+        }
+        return httpClient
     }
 }

@@ -17,7 +17,7 @@ interface KineduService {
     fun getActivities(
         @Header("Authorization") authorization: String,
         @Query("skill_id") skillId: String,
-        @Query("babyId") babyId: String
+        @Query("baby_id") babyId: String
     ): Call<KineduResponse>
 
     /**
@@ -28,7 +28,7 @@ interface KineduService {
     fun getArticles(
         @Header("Authorization") authorization: String,
         @Query("skill_id") skillId: String,
-        @Query("babyId") babyId: String
+        @Query("baby_id") babyId: String
     ): Call<KineduResponse>
 
     @Headers("Content-Type: application/json")

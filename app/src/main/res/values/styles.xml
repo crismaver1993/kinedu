@@ -5,7 +5,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorWhite</item>
         <item name="android:textColorPrimaryInverse">@color/colorBlack</item>
-
+        <!-- For the resting Spinner style -->
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <!-- For each individual Spinner list item once clicked on -->
+        <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -32,6 +35,23 @@
         <item name="cardCornerRadius">3dp</item>
         <item name="android:clickable">true</item>
         <item name="android:layout_margin">4dp</item>
+    </style>
 
+    <style name="spinnerItemStyle">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="ProgressDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

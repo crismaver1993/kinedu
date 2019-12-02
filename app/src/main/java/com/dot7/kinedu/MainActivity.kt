@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,11 +27,21 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white) // Hardcoded back arrow icon
+        changeTitle(getString(R.string.title_crawling))
+
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_catalogue) // I did
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    /**
+     * You can change the current title of MainActivity thrown this function
+     */
+    fun changeTitle(title: String) {
+        tv_toolbar_title.text = title
     }
 }

@@ -5,7 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,6 @@ import com.dot7.kinedu.interfaces.onExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
 import com.dot7.kinedu.models.KineduResponse
 import com.dot7.kinedu.util.KineduConstants
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,20 +57,33 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
     private fun initViews(rootView: View) {
         this@ActivitiesFragment.context?.let { mContext ->
             rvActivities = rootView.findViewById(R.id.rv_activities)
+            val learnMore = rootView.findViewById<TextView>(R.id.tv_activities_learn_more)
+
+
+            activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
             activitiesAdapter = ActivitiesAdapter(mContext, this)
             rvActivities.setHasFixedSize(true)
             rvActivities.layoutManager = LinearLayoutManager(mContext)
             activitiesAdapter?.let { rvActivities.adapter = it }
 
+            learnMore.setOnClickListener {
+                Toast.makeText(
+                    mContext,
+                    getString(R.string.msg_learn_more_click),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             if (isOnline(mContext)) {
                 val call = apiService?.getActivities(
                     KineduConstants.TOKEN,
                     KineduConstants.SKILL_ID,
                     KineduConstants.BABY_ID
                 )
+                showProgressBar()
                 call?.enqueue(object : Callback<KineduResponse> {
                     override fun onFailure(call: Call<KineduResponse>, t: Throwable) {
                         Log.v("xxxError", "${t.cause}")
+                        dismissProgressBar()
                     }
 
                     override fun onResponse(
@@ -86,6 +99,8 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
 
     /**
      * Show the activities
+     *
+     *@param response answer of the service to be validate and show
      */
     private fun showInfo(response: Response<KineduResponse>) {
         this@ActivitiesFragment.context?.let {
@@ -93,6 +108,7 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
                 val body = response.body()
                 if (body != null) {
                     activitiesAdapter.setListInfo(body.data.activities)
+                    dismissProgressBar()
                 }
             }
         }
@@ -116,14 +132,12 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
      */
     override fun showActivityDetail(activityInfo: ActivityDataInfo) {
         this@ActivitiesFragment.context?.let {
-            Snackbar.make(
+            showSnackBar(
+                it,
                 rootView.findViewById(R.id.ln_activities_container),
-                "Exercise ${activityInfo.name} for ages of ${activityInfo.age} and up",
-                Snackbar.LENGTH_LONG
+                "ok",
+                "Exercise ${activityInfo.name} for ages of ${activityInfo.age} and up"
             )
-                .setAction("Ok") { }
-                .setActionTextColor(ContextCompat.getColor(it, R.color.colorAccent))
-                .show()
         }
     }
 }

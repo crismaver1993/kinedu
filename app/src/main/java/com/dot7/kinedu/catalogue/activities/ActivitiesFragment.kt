@@ -5,14 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dot7.kinedu.BaseFragment
 import com.dot7.kinedu.R
+import com.dot7.kinedu.interfaces.onExerciseListener
+import com.dot7.kinedu.models.ActivityDataInfo
 import com.dot7.kinedu.models.KineduResponse
-import com.dot7.kinedu.models.MetadataResponse
 import com.dot7.kinedu.util.KineduConstants
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,10 +23,12 @@ import retrofit2.Response
 /**
  * Show all activities for the exercise selected
  */
-class ActivitiesFragment : BaseFragment() {
+class ActivitiesFragment : BaseFragment(), onExerciseListener {
     private lateinit var activitiesViewModel: ActivitiesViewModel
     private lateinit var rvActivities: RecyclerView
     private lateinit var activitiesAdapter: ActivitiesAdapter
+    private lateinit var rootView: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initAll()
@@ -33,17 +38,14 @@ class ActivitiesFragment : BaseFragment() {
      * Initialize variables, objects and functions
      */
     private fun initAll() {
-        activitiesViewModel =
-            ViewModelProviders.of(this).get(ActivitiesViewModel::class.java).apply {
-                setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-            }
+        activitiesViewModel = ViewModelProviders.of(this).get(ActivitiesViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_activities, container, false)
+        rootView = inflater.inflate(R.layout.fragment_activities, container, false)
         rootView?.let { initViews(rootView) }
         return rootView
     }
@@ -55,7 +57,11 @@ class ActivitiesFragment : BaseFragment() {
     private fun initViews(rootView: View) {
         this@ActivitiesFragment.context?.let { mContext ->
             rvActivities = rootView.findViewById(R.id.rv_activities)
-            activitiesAdapter = ActivitiesAdapter(mContext)
+            activitiesAdapter = ActivitiesAdapter(mContext, this)
+            rvActivities.setHasFixedSize(true)
+            rvActivities.layoutManager = LinearLayoutManager(mContext)
+            activitiesAdapter?.let { rvActivities.adapter = it }
+
             if (isOnline(mContext)) {
                 val call = apiService?.getActivities(
                     KineduConstants.TOKEN,
@@ -64,7 +70,7 @@ class ActivitiesFragment : BaseFragment() {
                 )
                 call?.enqueue(object : Callback<KineduResponse> {
                     override fun onFailure(call: Call<KineduResponse>, t: Throwable) {
-                   Log.v("xxxError", "${t.cause}")
+                        Log.v("xxxError", "${t.cause}")
                     }
 
                     override fun onResponse(
@@ -78,13 +84,14 @@ class ActivitiesFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Show the activities
+     */
     private fun showInfo(response: Response<KineduResponse>) {
-        this@ActivitiesFragment.context?.let { mContext ->
+        this@ActivitiesFragment.context?.let {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
-                    rvActivities.setHasFixedSize(true)
-                    rvActivities.layoutManager = LinearLayoutManager(mContext)
                     activitiesAdapter.setListInfo(body.data.activities)
                 }
             }
@@ -93,22 +100,30 @@ class ActivitiesFragment : BaseFragment() {
 
     companion object {
         /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private const val ARG_SECTION_NUMBER = "section_number"
-
-        /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): ActivitiesFragment {
-            return ActivitiesFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_SECTION_NUMBER, sectionNumber)
-                }
-            }
+        fun newInstance(): ActivitiesFragment {
+            return ActivitiesFragment()
+        }
+    }
+
+    /**
+     * onExerciseListener function
+     *
+     * Show exercise name and the correct age to start doing it
+     */
+    override fun showActivityDetail(activityInfo: ActivityDataInfo) {
+        this@ActivitiesFragment.context?.let {
+            Snackbar.make(
+                rootView.findViewById(R.id.ln_activities_container),
+                "Exercise ${activityInfo.name} for ages of ${activityInfo.age} and up",
+                Snackbar.LENGTH_LONG
+            )
+                .setAction("Ok") { }
+                .setActionTextColor(ContextCompat.getColor(it, R.color.colorAccent))
+                .show()
         }
     }
 }

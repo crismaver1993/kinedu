@@ -6,10 +6,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.dot7.kinedu.R
 import com.dot7.kinedu.catalogue.activities.ActivitiesFragment
+import com.dot7.kinedu.catalogue.articles.ArticlesFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_activities,
-    R.string.tab_text_arcticles
+    R.string.tab_text_articles
 )
 
 /**
@@ -20,9 +21,13 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return ActivitiesFragment.newInstance(position + 1)
+        return when (position) {
+            0 -> ActivitiesFragment.newInstance()
+            1 -> ArticlesFragment.newInstance()
+            else -> {
+                ActivitiesFragment.newInstance()
+            }
+        }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -30,7 +35,6 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     }
 
     override fun getCount(): Int {
-        // Show 2 total pages.
-        return 2
+        return TAB_TITLES.size
     }
 }

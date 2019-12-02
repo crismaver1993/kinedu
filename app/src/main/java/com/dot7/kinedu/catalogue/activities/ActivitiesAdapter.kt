@@ -7,17 +7,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dot7.kinedu.R
+import com.dot7.kinedu.interfaces.onExerciseListener
+import com.dot7.kinedu.models.ActivityDataInfo
 
-class ActivitiesAdapter(private val mContext: Context) :
+class ActivitiesAdapter(private val mContext: Context, private  val listener: onExerciseListener) :
     RecyclerView.Adapter<ActivitiesAdapter.ActivityViewHolder>() {
-    private var allActivities: MutableList<ActivityInfo> = ArrayList()
-    private var filteredList: MutableList<ActivityInfo> = ArrayList()
+    private var allActivities: MutableList<ActivityDataInfo> = ArrayList()
+    private var filteredList: MutableList<ActivityDataInfo> = ArrayList()
 
-    fun setListInfo(list: MutableList<ActivityInfo>) {
+    fun setListInfo(list: MutableList<ActivityDataInfo>) {
         allActivities.addAll(list)
+        filteredList.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -41,26 +45,36 @@ class ActivitiesAdapter(private val mContext: Context) :
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val info = filteredList[position]
-        holder.bind(mContext, info)
+        holder.bind(mContext, info,listener)
     }
 
     class ActivityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val cvActivity = view.findViewById<CardView>(R.id. cv_activity_info)
         private val ivCover = view.findViewById<ImageView>(R.id.iv_item_activity_info)
         private val tvTitle = view.findViewById<TextView>(R.id.tv_item_activity_info_title)
         private val tvDescription = view.findViewById<TextView>(R.id.tv_item_activity_info_desc)
         private val lnCheck = view.findViewById<LinearLayout>(R.id.ln_item_activity_info_checks)
 
-        fun bind(mContext: Context, info: ActivityInfo) {
+        fun bind(mContext: Context, info: ActivityDataInfo, listener: onExerciseListener) {
+            lnCheck.removeAllViews()
             Glide.with(mContext).load(info.thumbnail).into(ivCover)
             tvTitle.text = info.name
             tvDescription.text = info.purpose
+            paintChecks(mContext, info.activeMilestones)
+            cvActivity.setOnClickListener { listener.showActivityDetail(info) }
+        }
+
+        /**
+         * Paint the green circle checks
+         */
+        private fun paintChecks(mContext: Context, activeMilestones: Int) {
             var currentMilestone = 0
-            while (currentMilestone < info.activeMilestones) {
+            while (currentMilestone < activeMilestones) {
                 currentMilestone++
                 val ivFoot = ImageView(mContext)
-                val lp = LinearLayout.LayoutParams(80, 80)
+                val lp = LinearLayout.LayoutParams(40, 40)
                 ivFoot.layoutParams = lp
-                Glide.with(mContext).load(R.drawable.img_foot).into(ivFoot)
+                Glide.with(mContext).load(R.drawable.ic_check_circle_green).into(ivFoot)
                 lnCheck.addView(ivFoot)
             }
         }

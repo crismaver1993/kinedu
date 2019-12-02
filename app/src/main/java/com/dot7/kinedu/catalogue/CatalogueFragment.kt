@@ -10,8 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import com.dot7.kinedu.R
 import com.google.android.material.tabs.TabLayout
 
-class ExerciseFragment : Fragment() {
-
+class CatalogueFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
@@ -27,9 +26,9 @@ class ExerciseFragment : Fragment() {
     }
 
     private fun initView(rootView: View) {
-        this@ExerciseFragment.context?.let { mContext->
+        this@CatalogueFragment.context?.let { mContext->
             val viewPager: ViewPager = rootView.findViewById(R.id.view_pager)
-            val tabs: TabLayout = rootView.findViewById(R.id.tabs)
+            val tabs = rootView.findViewById<TabLayout>(R.id.tabs)
 
             val mSupportManager = activity?.supportFragmentManager
             mSupportManager?.let {

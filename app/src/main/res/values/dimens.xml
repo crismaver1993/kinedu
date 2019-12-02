@@ -6,14 +6,32 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
+    <!-- Tamaños estandar -->
+    <dimen name="dim_0">0dp</dimen>
+    <dimen name="dim_2">2dp</dimen>
+    <dimen name="dim_4">4dp</dimen>
     <dimen name="dim_8">8dp</dimen>
     <dimen name="dim_16">16dp</dimen>
     <dimen name="dim_24">24dp</dimen>
     <dimen name="dim_32">32dp</dimen>
     <dimen name="dim_40">40dp</dimen>
+    <dimen name="dim_48">48dp</dimen>
+    <dimen name="dim_56">56dp</dimen>
     <dimen name="dim_64">64dp</dimen>
+    <dimen name="dim_72">72dp</dimen>
+    <dimen name="dim_80">80dp</dimen>
+    <dimen name="dim_88">88dp</dimen>
+    <dimen name="dim_104">104dp</dimen>
 
-    <dimen name="text_dim8">8sp</dimen>
+    <!-- Tamaño del texto  -->
+    <dimen name="text_dim10">10sp</dimen>
+    <dimen name="text_dim12">12sp</dimen>
+    <dimen name="text_dim13">13sp</dimen>
+    <dimen name="text_dim14">14sp</dimen>
     <dimen name="text_dim16">16sp</dimen>
+    <dimen name="text_dim18">18sp</dimen>
+    <dimen name="text_dim20">20sp</dimen>
     <dimen name="text_dim24">24sp</dimen>
+    <dimen name="text_dim34">34sp</dimen>
+    <dimen name="text_dim48">48sp</dimen>
 </resources>

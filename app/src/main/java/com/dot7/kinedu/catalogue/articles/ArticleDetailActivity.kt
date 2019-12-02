@@ -9,6 +9,7 @@ import com.dot7.kinedu.models.ArticleInfoData
 import com.dot7.kinedu.models.KineduArticleDetailResponse
 import com.dot7.kinedu.util.KineduConstants
 import com.dot7.kinedu.util.customview.RectangleImageView
+import kotlinx.android.synthetic.main.activity_article_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +38,7 @@ class ArticleDetailActivity : BaseActivity() {
                 Glide.with(this@ArticleDetailActivity)
                     .load(it.picture)
                     .into(imgArticle)
+                tv_article_detail_info.text = it.name
             }
             if (isOnline(this)) {
                 val call = apiService?.getArticleDetail(
@@ -46,7 +48,6 @@ class ArticleDetailActivity : BaseActivity() {
                 showProgressBar()
                 call?.enqueue(object : Callback<KineduArticleDetailResponse> {
                     override fun onFailure(call: Call<KineduArticleDetailResponse>, t: Throwable) {
-                        Log.v("xxxError", "${t.cause}")
                         dismissProgressBar()
                     }
 
@@ -67,6 +68,7 @@ class ArticleDetailActivity : BaseActivity() {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
+                    tv_article_detail_body.text = body.data.article.body.toSpannedText()
                     dismissProgressBar()
                 }
             }

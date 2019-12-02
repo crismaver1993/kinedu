@@ -3,8 +3,11 @@ package com.dot7.kinedu
 import android.content.Context
 import android.graphics.Point
 import android.net.ConnectivityManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.text.Spanned
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -101,4 +104,15 @@ import com.google.android.material.snackbar.Snackbar
             .setActionTextColor(ContextCompat.getColor(mContext, R.color.colorAccent))
             .show()
     }
+
+     /**
+      * String converter to HTML
+      */
+     fun String.toSpannedText(): Spanned {
+         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+             Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+         } else {
+             Html.fromHtml(this)
+         }
+     }
 }

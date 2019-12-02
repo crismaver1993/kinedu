@@ -4,10 +4,7 @@ import com.dot7.kinedu.models.KineduActivityResponse
 import com.dot7.kinedu.models.KineduArticleDetailResponse
 import com.dot7.kinedu.models.KineduArticleResponse
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface KineduService {
 
@@ -39,6 +36,6 @@ interface KineduService {
     @GET("articles/{article_id}")
     fun getArticleDetail(
         @Header("Authorization") authorization: String,
-        @Query("article_id") articleId: String
+        @Path("article_id") articleId: String
     ): Call<KineduArticleDetailResponse>
 }

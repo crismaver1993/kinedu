@@ -180,7 +180,7 @@ data class ArticleActivityRelatedInfo(
     @SerializedName("activity_type")
     var activityType: String = "",
     @SerializedName("video_provider_thumbnails")
-    var videoProviderThumbnails: String = "",
+    var videoProviderThumbnails: VideoProviderThumbnails ,
     @SerializedName("video_id")
     var videoId: String = "",
     @SerializedName("area_id")
@@ -195,4 +195,13 @@ data class ArticleActivityRelatedInfo(
     var picture: String = "",
     @SerializedName("faved")
     var faved: Boolean = false
+)
+
+data class VideoProviderThumbnails(
+    var size1: String = "",
+    var size2: String = "",
+    var size3: String = "",
+    var size4: String = "",
+    var size5: String = "",
+    var size6: String = ""
 )

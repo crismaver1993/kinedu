@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <com.dot7.kinedu.util.SquareImageview
+            <com.dot7.kinedu.util.customview.SquareImageview
                 android:id="@+id/iv_item_activity_info"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

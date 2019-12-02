@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dot7.kinedu.BaseFragment
 import com.dot7.kinedu.R
-import com.dot7.kinedu.interfaces.onExerciseListener
+import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
-import com.dot7.kinedu.models.KineduResponse
+import com.dot7.kinedu.models.ArticleData
+import com.dot7.kinedu.models.ArticleInfoData
+import com.dot7.kinedu.models.KineduActivityResponse
 import com.dot7.kinedu.util.KineduConstants
+import com.dot7.kinedu.util.customview.RectangleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +26,7 @@ import retrofit2.Response
 /**
  * Show all activities for the exercise selected
  */
-class ActivitiesFragment : BaseFragment(), onExerciseListener {
+class ActivitiesFragment : BaseFragment(), OnExerciseListener {
     private lateinit var activitiesViewModel: ActivitiesViewModel
     private lateinit var rvActivities: RecyclerView
     private lateinit var activitiesAdapter: ActivitiesAdapter
@@ -80,15 +83,15 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
                     KineduConstants.BABY_ID
                 )
                 showProgressBar()
-                call?.enqueue(object : Callback<KineduResponse> {
-                    override fun onFailure(call: Call<KineduResponse>, t: Throwable) {
+                call?.enqueue(object : Callback<KineduActivityResponse> {
+                    override fun onFailure(call: Call<KineduActivityResponse>, t: Throwable) {
                         Log.v("xxxError", "${t.cause}")
                         dismissProgressBar()
                     }
 
                     override fun onResponse(
-                        call: Call<KineduResponse>,
-                        response: Response<KineduResponse>
+                        call: Call<KineduActivityResponse>,
+                        response: Response<KineduActivityResponse>
                     ) {
                         showInfo(response)
                     }
@@ -102,7 +105,7 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
      *
      *@param response answer of the service to be validate and show
      */
-    private fun showInfo(response: Response<KineduResponse>) {
+    private fun showInfo(response: Response<KineduActivityResponse>) {
         this@ActivitiesFragment.context?.let {
             if (response.isSuccessful) {
                 val body = response.body()
@@ -139,5 +142,9 @@ class ActivitiesFragment : BaseFragment(), onExerciseListener {
                 "Exercise ${activityInfo.name} for ages of ${activityInfo.age} and up"
             )
         }
+    }
+
+    override fun showArticleDetail(activityInfo: ArticleInfoData, rectangleImageView: RectangleImageView) {
+     //    N/A
     }
 }

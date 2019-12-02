@@ -11,10 +11,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dot7.kinedu.R
-import com.dot7.kinedu.interfaces.onExerciseListener
+import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
 
-class ActivitiesAdapter(private val mContext: Context, private  val listener: onExerciseListener) :
+class ActivitiesAdapter(private val mContext: Context, private  val listener: OnExerciseListener) :
     RecyclerView.Adapter<ActivitiesAdapter.ActivityViewHolder>() {
     private var allActivities: MutableList<ActivityDataInfo> = ArrayList()
     private var filteredList: MutableList<ActivityDataInfo> = ArrayList()
@@ -55,7 +55,7 @@ class ActivitiesAdapter(private val mContext: Context, private  val listener: on
         private val tvDescription = view.findViewById<TextView>(R.id.tv_item_activity_info_desc)
         private val lnCheck = view.findViewById<LinearLayout>(R.id.ln_item_activity_info_checks)
 
-        fun bind(mContext: Context, info: ActivityDataInfo, listener: onExerciseListener) {
+        fun bind(mContext: Context, info: ActivityDataInfo, listener: OnExerciseListener) {
             lnCheck.removeAllViews()
             Glide.with(mContext).load(info.thumbnail).into(ivCover)
             tvTitle.text = info.name

@@ -1,8 +1,32 @@
-package com.dot7.kinedu.catalogue.activities
+package com.dot7.kinedu.models
 
 import com.google.gson.annotations.SerializedName
 
-data class ActivityInfo(
+// ========================================================================================
+//                                  Generic
+// ========================================================================================
+
+data class KineduResponse(var data: ActivityData, var meta: MetadataResponse)
+
+data class MetadataResponse(
+    var page: Int = 0,
+    var perPage: Int = 0,
+    var totalPage: Int = 0,
+    var total: Int = 0
+)
+
+// ========================================================================================
+//                                  Activities
+// ========================================================================================
+
+data class ActivityData(
+    var id: Long = 0,
+    var name: String = "",
+    var type: String = "",
+    var activities: MutableList<ActivityDataInfo>
+)
+
+data class ActivityDataInfo(
     @SerializedName("id")
     var id: Long = 0,
     @SerializedName("name")

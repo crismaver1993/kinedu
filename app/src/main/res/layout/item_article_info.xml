@@ -18,6 +18,7 @@
             android:minHeight="40dp"
             android:layout_gravity="center"
             android:contentDescription="@string/image_desc"
+            android:transitionName="imgArticle"
             android:scaleType="centerCrop" />
 
         <TextView

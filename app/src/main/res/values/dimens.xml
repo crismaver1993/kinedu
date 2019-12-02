@@ -9,6 +9,9 @@
     <dimen name="dim_8">8dp</dimen>
     <dimen name="dim_16">16dp</dimen>
     <dimen name="dim_24">24dp</dimen>
+    <dimen name="dim_32">32dp</dimen>
+    <dimen name="dim_40">40dp</dimen>
+    <dimen name="dim_64">64dp</dimen>
 
     <dimen name="text_dim8">8sp</dimen>
     <dimen name="text_dim16">16sp</dimen>

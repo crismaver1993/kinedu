@@ -111,11 +111,11 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     ) {
         this@ArticlesFragment.context?.let {
             val intent = Intent(it, ArticleDetailActivity::class.java)
-            intent.putExtra("ArticleModel", activityInfo)
+            intent.putExtra(KineduConstants.ARTICLE_MODEL, activityInfo)
             val options = activity?.let { mActivity ->
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                     mActivity,
-                    rectangleImageView, "imgArticle"
+                    rectangleImageView, KineduConstants.ARTICLE_MODEL_ANIM
                 )
             }
             startActivity(intent, options?.toBundle())

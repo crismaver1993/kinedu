@@ -8,4 +8,7 @@ object KineduConstants {
 
     const val SKILL_ID = "5"
     const val BABY_ID = "2064732"
+
+    const val ARTICLE_MODEL = "ArticleModel"
+    const val ARTICLE_MODEL_ANIM = "imgArticle"
 }

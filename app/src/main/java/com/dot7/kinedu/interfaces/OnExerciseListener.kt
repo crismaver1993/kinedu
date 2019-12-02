@@ -8,5 +8,5 @@ interface OnExerciseListener {
 
     fun showActivityDetail(activityInfo: ActivityDataInfo)
 
-    fun showArticleDetail(activityInfo: ArticleInfoData,rectangleImageView: RectangleImageView)
+    fun showArticleDetail(articleInfoData: ArticleInfoData,rectangleImageView: RectangleImageView)
 }

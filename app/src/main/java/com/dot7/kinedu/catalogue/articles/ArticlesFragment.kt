@@ -106,12 +106,12 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
      * Show exercise name and the correct age to start doing it
      */
     override fun showArticleDetail(
-        activityInfo: ArticleInfoData,
+        articleInfoData:  ArticleInfoData,
         rectangleImageView: RectangleImageView
     ) {
         this@ArticlesFragment.context?.let {
             val intent = Intent(it, ArticleDetailActivity::class.java)
-            intent.putExtra(KineduConstants.ARTICLE_MODEL, activityInfo)
+            intent.putExtra(KineduConstants.ARTICLE_MODEL, articleInfoData)
             val options = activity?.let { mActivity ->
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                     mActivity,

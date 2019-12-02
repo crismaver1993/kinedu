@@ -1,14 +1,20 @@
 package com.dot7.kinedu.catalogue.articles
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import com.bumptech.glide.Glide
+import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.R
 import com.dot7.kinedu.models.ArticleInfoData
+import com.dot7.kinedu.models.KineduArticleDetailResponse
 import com.dot7.kinedu.util.KineduConstants
 import com.dot7.kinedu.util.customview.RectangleImageView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class ArticleDetailActivity : AppCompatActivity() {
+class ArticleDetailActivity : BaseActivity() {
+    private var idAccount = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,15 +26,50 @@ class ArticleDetailActivity : AppCompatActivity() {
      * Initialize variables, objects and functions
      */
     private fun initAll() {
-
         val bundle = intent
         val imgArticle: RectangleImageView = findViewById(R.id.iv_article_detail_cover)
-        val articleInfo = bundle.getParcelableExtra<ArticleInfoData>(KineduConstants.ARTICLE_MODEL)
 
-        articleInfo?.let {
-            Glide.with(this@ArticleDetailActivity)
-                .load(it.picture)
-                .into(imgArticle)
+        if (bundle != null) {
+            val articleInfo =
+                bundle.getParcelableExtra<ArticleInfoData>(KineduConstants.ARTICLE_MODEL)
+            articleInfo?.let {
+                idAccount = it.id.toString()
+                Glide.with(this@ArticleDetailActivity)
+                    .load(it.picture)
+                    .into(imgArticle)
+            }
+            if (isOnline(this)) {
+                val call = apiService?.getArticleDetail(
+                    KineduConstants.TOKEN,
+                    idAccount
+                )
+                showProgressBar()
+                call?.enqueue(object : Callback<KineduArticleDetailResponse> {
+                    override fun onFailure(call: Call<KineduArticleDetailResponse>, t: Throwable) {
+                        Log.v("xxxError", "${t.cause}")
+                        dismissProgressBar()
+                    }
+
+                    override fun onResponse(
+                        call: Call<KineduArticleDetailResponse>,
+                        response: Response<KineduArticleDetailResponse>
+                    ) {
+                        showInfo(response)
+                    }
+                })
+            }
+        }
+    }
+
+
+    private fun showInfo(response: Response<KineduArticleDetailResponse>) {
+        this@ArticleDetailActivity?.let {
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    dismissProgressBar()
+                }
+            }
         }
     }
 }

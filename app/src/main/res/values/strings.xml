@@ -16,7 +16,8 @@
     <string name="tab_text_articles">Articles</string>
     <string name="question_how_is_doing">How is fwefew doing in this skill?</string>
     <string name="label_learn_more">Learn more</string>
+    <string name="label_retry">Retry</string>
     <string name="msg_learn_more_click">Studies suggest that approximately 50% of babies begin crawling by 8 months.</string>
+    <string name="msg_no_internet_error">No Internet Connection</string>
     <string name="title_crawling">Crawling</string>
-
 </resources>

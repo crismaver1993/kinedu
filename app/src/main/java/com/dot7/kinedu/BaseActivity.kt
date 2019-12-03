@@ -10,6 +10,8 @@ import android.text.Html
 import android.text.Spanned
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.dot7.kinedu.network.KineduClient
 import com.dot7.kinedu.network.KineduService
@@ -114,5 +116,27 @@ import com.google.android.material.snackbar.Snackbar
          } else {
              Html.fromHtml(this)
          }
+     }
+
+     /**
+      * Show Internet error
+      * @param errorMessage id string erro to show
+      * @param actionName id string action text
+      * @param listener interface to do action
+      */
+     fun showSnackError(errorMessage: Int, actionName: Int, listener: View.OnClickListener) {
+         val snackbar = Snackbar.make(
+             findViewById(android.R.id.content),
+             errorMessage,
+             Snackbar.LENGTH_INDEFINITE
+         )
+         snackbar.setAction(actionName, listener)
+         snackbar.view.setBackgroundColor(ContextCompat.getColor(baseContext, R.color.colorRed))
+         val button =
+             snackbar.view.findViewById<Button>(com.google.android.material.R.id.snackbar_action)
+         button.transformationMethod = null
+         snackbar.setActionTextColor(ContextCompat.getColor(baseContext, android.R.color.white))
+         (snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView).maxLines = 5
+         snackbar.show()
      }
 }

@@ -1,14 +1,24 @@
 package com.dot7.kinedu.catalogue.activities
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import com.dot7.kinedu.viewModel.ScreenState
 
-class ActivitiesViewModel : ViewModel() {
+/**
+ * Activities viewmodel
+ */
+class ActivitiesViewModel(app: Application) : AndroidViewModel(app) {
+    private val repository = ActivitiesRepository(app)
 
-    private val _index = MutableLiveData<Int>()
+    val observerResponse: LiveData<ScreenState<ActivitiesState>>
+        get() {
+            return repository.activitiesState
+        }
 
-
-    fun setIndex(index: Int) {
-        _index.value = index
+    fun getActivities(mContext: Context) {
+        repository.getActivities(mContext)
     }
+
 }

@@ -20,9 +20,11 @@ class ActivitiesAdapter(private val mContext: Context, private  val listener: On
     private var filteredList: MutableList<ActivityDataInfo> = ArrayList()
 
     fun setListInfo(list: MutableList<ActivityDataInfo>) {
-        allActivities.addAll(list)
-        filteredList.addAll(list)
-        notifyDataSetChanged()
+        list?.let {
+            allActivities.addAll(list)
+            filteredList.addAll(list)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(

@@ -1,7 +1,7 @@
 package com.dot7.kinedu.catalogue.articles
 
 import android.os.Bundle
-import android.util.Log
+import android.text.method.LinkMovementMethod
 import com.bumptech.glide.Glide
 import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.R
@@ -62,13 +62,17 @@ class ArticleDetailActivity : BaseActivity() {
         }
     }
 
-
+    /**
+     * Show text info
+     * @param response answer from service
+     */
     private fun showInfo(response: Response<KineduArticleDetailResponse>) {
-        this@ArticleDetailActivity?.let {
+        this@ArticleDetailActivity.let {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
                     tv_article_detail_body.text = body.data.article.body.toSpannedText()
+                    tv_article_detail_body.movementMethod = LinkMovementMethod.getInstance()
                     dismissProgressBar()
                 }
             }

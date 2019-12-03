@@ -75,7 +75,7 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
 
             if (isOnline(mContext)) {
                 getActivities()
-            }else{
+            } else {
                 noInternet()
             }
         }
@@ -117,6 +117,12 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
                     dismissProgressBar()
                     noInternet()
                 }
+
+                is ScreenState.ErrorServer -> {
+                    Toast.makeText(it, getString(R.string.msg_error), Toast.LENGTH_SHORT).show()
+                    dismissProgressBar()
+                }
+
                 else -> {
                     dismissProgressBar()
                 }

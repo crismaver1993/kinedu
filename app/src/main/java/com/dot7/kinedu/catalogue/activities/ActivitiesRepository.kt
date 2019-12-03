@@ -61,6 +61,8 @@ class ActivitiesRepository(val context: Context) {
                         activitiesState.value =
                             ScreenState.Render(ActivitiesState.ShowActivities(it.activities))
                     }
+                }else{
+                    activitiesState.value = ScreenState.ErrorServer
                 }
             }
         }

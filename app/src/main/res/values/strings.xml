@@ -20,4 +20,5 @@
     <string name="msg_learn_more_click">Studies suggest that approximately 50% of babies begin crawling by 8 months.</string>
     <string name="msg_no_internet_error">No Internet Connection</string>
     <string name="title_crawling">Crawling</string>
+    <string name="msg_error">Ha ocurrido un erro</string>
 </resources>

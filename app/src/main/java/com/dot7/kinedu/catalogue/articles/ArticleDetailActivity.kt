@@ -64,6 +64,7 @@ class ArticleDetailActivity : BaseActivity() {
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = ""
         mToolbar.setNavigationOnClickListener{ onBackPressed()}
     }
 

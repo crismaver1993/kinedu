@@ -30,6 +30,7 @@ import com.dot7.kinedu.viewModel.ScreenState
  */
 class ArticlesFragment : BaseFragment(), OnExerciseListener {
     private lateinit var articlesViewModel: ArticlesViewModel
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var rootView: View
     private lateinit var rvArticles: RecyclerView
     private lateinit var articlesAdapter: ArticlesAdapter
@@ -70,7 +71,7 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
             rvArticles.setHasFixedSize(true)
             rvArticles.layoutManager = LinearLayoutManager(mContext)
             articlesAdapter.let { rvArticles.adapter = it }
-            val swipeRefreshLayout =  rootView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_articles)
+            swipeRefreshLayout =  rootView.findViewById(R.id.swipe_refresh_articles)
             swipeRefreshLayout.setOnRefreshListener {
                 getArticles()
             }
@@ -167,6 +168,7 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     }
 
     override fun updateView(count: Int) {
+        swipeRefreshLayout.isEnabled = false
         if (articlesAdapter.itemCount <= 0) {
             flArticles.visibility = View.VISIBLE
             rvArticles.visibility = View.GONE
@@ -180,6 +182,7 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
      * Show Snack bar to notify the user about no internet connection
      */
     private fun noInternet() {
+        swipeRefreshLayout.isEnabled = false
         (activity as BaseActivity).showSnackError(
             R.string.msg_no_internet_error,
             R.string.label_retry,

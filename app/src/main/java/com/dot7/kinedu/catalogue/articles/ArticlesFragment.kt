@@ -12,16 +12,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.BaseFragment
-import com.dot7.kinedu.catalogue.CatalogueActivity
 import com.dot7.kinedu.R
+import com.dot7.kinedu.catalogue.CatalogueActivity
 import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
 import com.dot7.kinedu.models.ArticleInfoData
 import com.dot7.kinedu.util.KineduConstants
 import com.dot7.kinedu.util.customview.RectangleImageView
 import com.dot7.kinedu.viewModel.ScreenState
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -68,6 +70,10 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
             rvArticles.setHasFixedSize(true)
             rvArticles.layoutManager = LinearLayoutManager(mContext)
             articlesAdapter.let { rvArticles.adapter = it }
+            val swipeRefreshLayout =  rootView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_articles)
+            swipeRefreshLayout.setOnRefreshListener {
+                getArticles()
+            }
             getArticles()
         }
     }

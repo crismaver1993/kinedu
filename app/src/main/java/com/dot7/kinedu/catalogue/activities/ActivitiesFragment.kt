@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.BaseFragment
 import com.dot7.kinedu.R
@@ -75,6 +76,11 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
                     getString(R.string.msg_learn_more_click),
                     Toast.LENGTH_SHORT
                 ).show()
+            }
+
+            val swipeRefreshLayout =  rootView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_activities)
+            swipeRefreshLayout.setOnRefreshListener {
+                getActivities()
             }
             getActivities()
         }

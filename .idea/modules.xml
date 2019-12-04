@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Kinedu.iml" filepath="$PROJECT_DIR$/Kinedu.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kinedu-Kinedu.iml" filepath="$PROJECT_DIR$/kinedu-Kinedu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/kinedu-app.iml" filepath="$PROJECT_DIR$/app/kinedu-app.iml" />
     </modules>
   </component>
 </project>

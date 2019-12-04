@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/nav_host_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="@dimen/dim_112"
+            android:gravity="center"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/dim_16"
+                android:paddingRight="@dimen/dim_16"
+                tools:ignore="RtlSymmetry"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="19sp"
+                    android:paddingTop="8dp"
+                    android:textStyle="bold"
+                    tools:text="Crawling" />
+
+                <Spinner
+                    android:id="@+id/sp_ages"
+                    style="@style/AppTheme"
+                    android:layout_width="wrap_content"
+                    android:minWidth="240dp"
+                    android:layout_marginTop="@dimen/dim_16"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:paddingEnd="@dimen/dim_16"
+                    android:paddingRight="@dimen/dim_16"
+                    tools:ignore="RtlSymmetry"
+                    android:background="@color/colorPrimary"
+                    android:entries="@array/ages_list"
+                    android:gravity="center"
+                     />
+                <View
+                    android:layout_width="240dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorWhite"
+                    android:layout_marginEnd="16dp"
+                    android:paddingBottom="16dp"
+                    android:layout_marginBottom="16dp"
+                    />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+</LinearLayout>

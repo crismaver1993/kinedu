@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_article_info"
+    style="@style/ItemCardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.dot7.kinedu.util.customview.RectangleImageView
+            android:id="@+id/iv_item_article_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/image_desc"
+            android:transitionName="imgArticle"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_item_article_info_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="19sp"
+            tools:text="title" />
+
+        <TextView
+            android:id="@+id/tv_item_article_info_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="8dp"
+            android:textSize="12sp"
+            tools:text="description" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

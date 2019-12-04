@@ -1,0 +1,40 @@
+package com.dot7.kinedu.catalogue
+
+import android.content.Context
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import com.dot7.kinedu.R
+import com.dot7.kinedu.catalogue.activities.ActivitiesFragment
+import com.dot7.kinedu.catalogue.articles.ArticlesFragment
+
+private val TAB_TITLES = arrayOf(
+    R.string.tab_text_activities,
+    R.string.tab_text_articles
+)
+
+/**
+ * A [FragmentPagerAdapter] that returns a fragment corresponding to
+ * one of the sections/tabs/pages.
+ */
+class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
+    FragmentPagerAdapter(fm) {
+
+    override fun getItem(position: Int): Fragment {
+        return when (position) {
+            0 -> ActivitiesFragment.newInstance()
+            1 -> ArticlesFragment.newInstance()
+            else -> {
+                ActivitiesFragment.newInstance()
+            }
+        }
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return context.resources.getString(TAB_TITLES[position])
+    }
+
+    override fun getCount(): Int {
+        return TAB_TITLES.size
+    }
+}

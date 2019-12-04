@@ -3,23 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_catalogue">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.dot7.kinedu.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+    <!--<fragment
+      android:id="@+id/navigation_my_family"
+      android:name="com.dot7.kinedu.catalogue.CatalogueFragment"
+      android:label="@string/title_my_family"
+      tools:layout="@layout/fragment_activities" />
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.dot7.kinedu.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+  <fragment
+      android:id="@+id/navigation_dashboard"
+      android:name="com.dot7.kinedu.catalogue.CatalogueFragment"
+      android:label="@string/title_my_plan"
+      tools:layout="@layout/fragment_activities" />-->
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.dot7.kinedu.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+  <fragment
+      android:id="@+id/navigation_catalogue"
+      android:name="com.dot7.kinedu.catalogue.CatalogueFragment"
+      android:label="@string/title_catalogue"
+      tools:layout="@layout/fragment_activities" />
+
+<!--  <fragment
+      android:id="@+id/navigation_progress"
+      android:name="com.dot7.kinedu.catalogue.CatalogueFragment"
+      android:label="@string/title_progress"
+      tools:layout="@layout/fragment_activities" />
+
+  <fragment
+      android:id="@+id/navigation_milestones"
+      android:name="com.dot7.kinedu.catalogue.CatalogueFragment"
+      android:label="@string/title_progress"
+      tools:layout="@layout/fragment_activities" />-->
 </navigation>

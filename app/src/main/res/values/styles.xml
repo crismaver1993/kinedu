@@ -40,12 +40,13 @@
     <style name="spinnerItemStyle">
         <item name="android:padding">10dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="spinnerDropDownItemStyle">
         <item name="android:textSize">19sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorBlueLight</item>
+        <item name="android:background">@color/colorWhite</item>
     </style>
 
     <style name="ProgressDialog" parent="Theme.AppCompat.Dialog.Alert">

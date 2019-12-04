@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +16,13 @@ import com.dot7.kinedu.util.customview.RectangleImageView
 class ArticlesAdapter(private val mContext: Context, private val listener: OnExerciseListener) :
     RecyclerView.Adapter<ArticlesAdapter.ActivityViewHolder>() {
     private var allArticles: MutableList<ArticleInfoData> = ArrayList()
+    private var articlesFiltered: MutableList<ArticleInfoData> = ArrayList()
 
     fun setListInfo(list: MutableList<ArticleInfoData>) {
+        allArticles.clear()
         allArticles.addAll(list)
+        articlesFiltered.clear()
+        articlesFiltered.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -38,12 +41,29 @@ class ArticlesAdapter(private val mContext: Context, private val listener: OnExe
     }
 
     override fun getItemCount(): Int {
-        return allArticles.size
+        return articlesFiltered.size
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
-        val info = allArticles[position]
+        val info = articlesFiltered[position]
         holder.bind(mContext, info, listener)
+    }
+
+    fun filterList(age: Int) {
+        if(age != 0){
+            val newList: List<ArticleInfoData> =
+                allArticles.filter { it.minAge == age.toString() }
+            articlesFiltered.clear()
+            articlesFiltered.addAll(newList)
+            notifyDataSetChanged()
+
+        }else{
+            articlesFiltered.clear()
+            articlesFiltered.addAll(allArticles)
+            notifyDataSetChanged()
+        }
+
+       listener.updateView(articlesFiltered.size)
     }
 
     class ActivityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -56,7 +76,7 @@ class ArticlesAdapter(private val mContext: Context, private val listener: OnExe
             Glide.with(mContext).load(info.picture).into(ivCover)
             tvTitle.text = info.name
             tvDescription.text = info.shortDesc
-            cvArticle.setOnClickListener { listener.showArticleDetail(info,ivCover) }
+            cvArticle.setOnClickListener { listener.showArticleDetail(info, ivCover) }
         }
     }
 }

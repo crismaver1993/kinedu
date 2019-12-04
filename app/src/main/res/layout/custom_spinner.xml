@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@android:id/text1"
     style="?attr/spinnerDropDownItemStyle"
     android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/dim_16"
     android:ellipsize="marquee"
-    android:textColor="@color/colorBlueLight"
-    android:background="@drawable/abc_spinner_mtrl_am_alpha"
-    android:backgroundTint="@android:color/white"/>
+    android:textColor="@color/colorWhite"
+    android:layout_gravity="end"
+    android:textSize="@dimen/text_dim18"
+    android:drawablePadding="@dimen/text_dim18"
+    tools:text="title"
+    android:drawableEnd="@drawable/ic_arrow_drop_down_white"
+    android:background="@color/colorPrimary"
+    android:backgroundTint="@color/colorPrimary" />

@@ -2,10 +2,10 @@ package com.dot7.kinedu.catalogue.articles
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
@@ -14,18 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.BaseFragment
-import com.dot7.kinedu.MainActivity
+import com.dot7.kinedu.catalogue.CatalogueActivity
 import com.dot7.kinedu.R
 import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
 import com.dot7.kinedu.models.ArticleInfoData
-import com.dot7.kinedu.models.KineduArticleResponse
 import com.dot7.kinedu.util.KineduConstants
 import com.dot7.kinedu.util.customview.RectangleImageView
 import com.dot7.kinedu.viewModel.ScreenState
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * A placeholder fragment containing a simple view.
@@ -35,6 +31,7 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     private lateinit var rootView: View
     private lateinit var rvArticles: RecyclerView
     private lateinit var articlesAdapter: ArticlesAdapter
+    private lateinit var flArticles: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +62,7 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     private fun initViews(rootView: View) {
         this@ArticlesFragment.context?.let { mContext ->
             rvArticles = rootView.findViewById(R.id.rv_articles)
+            flArticles = rootView.findViewById(R.id.fl_articles_no_found)
             activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
             articlesAdapter = ArticlesAdapter(mContext, this)
             rvArticles.setHasFixedSize(true)
@@ -73,7 +71,6 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
             getArticles()
         }
     }
-
 
     fun refreshData() {
         if (articlesAdapter.itemCount <= 0) {
@@ -163,6 +160,16 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
         }
     }
 
+    override fun updateView(count: Int) {
+        if (articlesAdapter.itemCount <= 0) {
+            flArticles.visibility = View.VISIBLE
+            rvArticles.visibility = View.GONE
+        } else {
+            flArticles.visibility = View.GONE
+            rvArticles.visibility = View.VISIBLE
+        }
+    }
+
     /**
      * Show Snack bar to notify the user about no internet connection
      */
@@ -170,12 +177,21 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
         (activity as BaseActivity).showSnackError(
             R.string.msg_no_internet_error,
             R.string.label_retry,
-            View.OnClickListener { (activity as MainActivity).reloadFragments()})
+            View.OnClickListener { (activity as CatalogueActivity).reloadFragments()})
     }
 
     override fun showActivityDetail(activityInfo: ActivityDataInfo) {
         // N/A
     }
+
+    /**
+     * Filter articles by age
+     * @param age to filter
+     */
+    fun filterAge(age: Int) {
+        articlesAdapter?.filterList(age)
+    }
+
     companion object {
         /**
          * Returns a new instance of this fragment for the given section

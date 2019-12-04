@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
@@ -12,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.BaseFragment
-import com.dot7.kinedu.MainActivity
 import com.dot7.kinedu.R
+import com.dot7.kinedu.catalogue.CatalogueActivity
 import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
 import com.dot7.kinedu.models.ArticleInfoData
@@ -28,6 +29,7 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
     private lateinit var rvActivities: RecyclerView
     private lateinit var activitiesAdapter: ActivitiesAdapter
     private lateinit var rootView: View
+    private lateinit var tvActivitiesNotFound: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +60,7 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
     private fun initViews(rootView: View) {
         this@ActivitiesFragment.context?.let { mContext ->
             rvActivities = rootView.findViewById(R.id.rv_activities)
+            tvActivitiesNotFound = rootView.findViewById(R.id.tv_activities_no_found)
             val learnMore = rootView.findViewById<CardView>(R.id.cv_activities_info)
 
             activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -149,7 +152,7 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
         (activity as BaseActivity).showSnackError(
             R.string.msg_no_internet_error,
             R.string.label_retry,
-            View.OnClickListener { (activity as MainActivity).reloadFragments() })
+            View.OnClickListener { (activity as CatalogueActivity).reloadFragments() })
     }
 
     companion object {
@@ -184,4 +187,23 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
         rectangleImageView: RectangleImageView
     ) { //    N/A }
     }
+
+    override fun updateView(count: Int) {
+        if (activitiesAdapter.itemCount <= 0) {
+            tvActivitiesNotFound.visibility = View.VISIBLE
+            rvActivities.visibility = View.GONE
+        } else {
+            tvActivitiesNotFound.visibility = View.VISIBLE
+            rvActivities.visibility = View.GONE
+        }
+    }
+
+    /**
+     * Filter activities by age
+     * @param age to filter
+     */
+    fun filterAge(age: Int) {
+        activitiesAdapter?.filterList(age)
+    }
+
 }

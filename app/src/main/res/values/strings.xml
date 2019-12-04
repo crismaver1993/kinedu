@@ -21,4 +21,6 @@
     <string name="msg_no_internet_error">No Internet Connection</string>
     <string name="title_crawling">Crawling</string>
     <string name="msg_error">Ha ocurrido un erro</string>
+    <string name="label_no_articles">No articles for this age found</string>
+    <string name="label_no_activities">No activities for this age found</string>
 </resources>

@@ -14,14 +14,16 @@ import com.dot7.kinedu.R
 import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
 
-class ActivitiesAdapter(private val mContext: Context, private  val listener: OnExerciseListener) :
+class ActivitiesAdapter(private val mContext: Context, private val listener: OnExerciseListener) :
     RecyclerView.Adapter<ActivitiesAdapter.ActivityViewHolder>() {
     private var allActivities: MutableList<ActivityDataInfo> = ArrayList()
     private var filteredList: MutableList<ActivityDataInfo> = ArrayList()
 
     fun setListInfo(list: MutableList<ActivityDataInfo>) {
         list?.let {
+            allActivities.clear()
             allActivities.addAll(list)
+            filteredList.clear()
             filteredList.addAll(list)
             notifyDataSetChanged()
         }
@@ -47,11 +49,26 @@ class ActivitiesAdapter(private val mContext: Context, private  val listener: On
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val info = filteredList[position]
-        holder.bind(mContext, info,listener)
+        holder.bind(mContext, info, listener)
+    }
+
+    fun filterList(age: Int) {
+        if (age != 0) {
+            val newList: List<ActivityDataInfo> =
+                allActivities.filter { it.age == age.toString() }
+            filteredList.clear()
+            filteredList.addAll(newList)
+            notifyDataSetChanged()
+        } else {
+            filteredList.clear()
+            filteredList.addAll(allActivities)
+            notifyDataSetChanged()
+        }
+        listener.updateView(filteredList.size)
     }
 
     class ActivityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val cvActivity = view.findViewById<CardView>(R.id. cv_activity_info)
+        private val cvActivity = view.findViewById<CardView>(R.id.cv_activity_info)
         private val ivCover = view.findViewById<ImageView>(R.id.iv_item_activity_info)
         private val tvTitle = view.findViewById<TextView>(R.id.tv_item_activity_info_title)
         private val tvDescription = view.findViewById<TextView>(R.id.tv_item_activity_info_desc)

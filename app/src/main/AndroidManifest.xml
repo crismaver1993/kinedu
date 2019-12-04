@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name=".catalogue.CatalogueActivity"
             android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

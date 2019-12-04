@@ -7,6 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".catalogue.activities.ActivitiesFragment">
 
+    <FrameLayout
+        android:id="@+id/fl_articles_no_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+        <TextView
+            android:textSize="@dimen/text_dim18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:text="@string/label_no_articles"/>
+    </FrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_articles"
         android:layout_width="match_parent"

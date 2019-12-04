@@ -9,4 +9,6 @@ interface OnExerciseListener {
     fun showActivityDetail(activityInfo: ActivityDataInfo)
 
     fun showArticleDetail(articleInfoData: ArticleInfoData,rectangleImageView: RectangleImageView)
+
+    fun updateView(count: Int)
 }

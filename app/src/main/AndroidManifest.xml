@@ -15,7 +15,6 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".BaseActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="">
@@ -26,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".catalogue.articles.ArticleDetailActivity" />
+        <activity
+            android:name=".BaseActivity"
+            android:label=""/>
     </application>
 
 </manifest>

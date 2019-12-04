@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <ScrollView
+        android:id="@+id/sv_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,8 +16,16 @@
     <LinearLayout
         android:id="@+id/ln_activity_article_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_article_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <com.dot7.kinedu.util.customview.RectangleImageView
             android:id="@+id/iv_article_detail_cover"
@@ -42,9 +51,10 @@
             android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/bv_share_detail"
                 android:layout_width="@dimen/dim_48"
                 android:layout_height="@dimen/dim_48"
-                android:padding="8dp"
+                android:padding="@dimen/dim_8"
                 android:contentDescription="@string/image_desc"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_share_white"/>

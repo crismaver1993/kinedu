@@ -205,5 +205,4 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
     fun filterAge(age: Int) {
         activitiesAdapter?.filterList(age)
     }
-
 }

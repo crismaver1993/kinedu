@@ -18,16 +18,19 @@
         <activity
             android:name=".catalogue.CatalogueActivity"
             android:label="">
+        </activity>
+        <activity android:name=".catalogue.articles.ArticleDetailActivity" />
+        <activity
+            android:name=".BaseActivity"
+            android:label=""/>
+        <activity android:name=".SplashActivity"
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".catalogue.articles.ArticleDetailActivity" />
-        <activity
-            android:name=".BaseActivity"
-            android:label=""/>
     </application>
 
 </manifest>

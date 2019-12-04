@@ -193,8 +193,8 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
             tvActivitiesNotFound.visibility = View.VISIBLE
             rvActivities.visibility = View.GONE
         } else {
-            tvActivitiesNotFound.visibility = View.VISIBLE
-            rvActivities.visibility = View.GONE
+            tvActivitiesNotFound.visibility = View.GONE
+            rvActivities.visibility = View.VISIBLE
         }
     }
 

@@ -41,6 +41,13 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
         activitiesViewModel.observerResponse.observe(this, Observer { onChanged(it) })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (activitiesAdapter.itemCount <= 0) {
+            getActivities()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

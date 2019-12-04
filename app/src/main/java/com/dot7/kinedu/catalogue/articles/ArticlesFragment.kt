@@ -35,11 +35,18 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     private lateinit var rvArticles: RecyclerView
     private lateinit var articlesAdapter: ArticlesAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initAll()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(articlesAdapter.itemCount<=0){
+            getArticles()
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -178,5 +185,4 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
             return ArticlesFragment()
         }
     }
-
 }

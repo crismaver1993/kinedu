@@ -81,6 +81,7 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
 
             swipeRefreshLayout =  rootView.findViewById(R.id.swipe_refresh_activities)
             swipeRefreshLayout.setOnRefreshListener {
+                swipeRefreshLayout.isRefreshing = false
                 getActivities()
             }
             getActivities()
@@ -156,7 +157,6 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
      * Show Snack bar to notify the user about no internet connection
      */
     private fun noInternet() {
-        swipeRefreshLayout.isEnabled = false
         (activity as BaseActivity).showSnackError(
             R.string.msg_no_internet_error,
             R.string.label_retry,
@@ -197,7 +197,6 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
     }
 
     override fun updateView(count: Int) {
-        swipeRefreshLayout.isEnabled = false
         if (activitiesAdapter.itemCount <= 0) {
             tvActivitiesNotFound.visibility = View.VISIBLE
             rvActivities.visibility = View.GONE
@@ -212,6 +211,6 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
      * @param age to filter
      */
     fun filterAge(age: Int) {
-        activitiesAdapter?.filterList(age)
+        activitiesAdapter.filterList(age)
     }
 }

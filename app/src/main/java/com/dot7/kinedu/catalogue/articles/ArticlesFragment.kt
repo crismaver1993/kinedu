@@ -73,6 +73,7 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
             articlesAdapter.let { rvArticles.adapter = it }
             swipeRefreshLayout =  rootView.findViewById(R.id.swipe_refresh_articles)
             swipeRefreshLayout.setOnRefreshListener {
+                swipeRefreshLayout.isRefreshing = false
                 getArticles()
             }
             getArticles()
@@ -168,7 +169,6 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     }
 
     override fun updateView(count: Int) {
-        swipeRefreshLayout.isEnabled = false
         if (articlesAdapter.itemCount <= 0) {
             flArticles.visibility = View.VISIBLE
             rvArticles.visibility = View.GONE
@@ -182,7 +182,6 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
      * Show Snack bar to notify the user about no internet connection
      */
     private fun noInternet() {
-        swipeRefreshLayout.isEnabled = false
         (activity as BaseActivity).showSnackError(
             R.string.msg_no_internet_error,
             R.string.label_retry,

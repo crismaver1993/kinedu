@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_activities"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:id="@+id/ln_activities_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_activities_info"
+        style="@style/GrayCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="64dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:contentDescription="@string/image_desc"
+                android:src="@drawable/img_baby_crawling" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:paddingStart="8dp"
+                    android:paddingLeft="8dp"
+                    android:text="@string/question_how_is_doing"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/tv_activities_learn_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:layout_gravity="end"
+                        android:text="@string/label_learn_more"
+                        android:textColor="@color/colorWhite"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:drawableRight="@drawable/ic_arrow_right_white"
+                        android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="56dp">
+        <TextView
+            android:id="@+id/tv_activities_no_found"
+            android:textSize="@dimen/text_dim18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:gravity="center"
+            android:text="@string/label_no_activities"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_activities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp" />
+    </FrameLayout>
+</LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

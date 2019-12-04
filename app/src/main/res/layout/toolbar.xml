@@ -42,7 +42,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="19sp"
                     android:paddingTop="8dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="28dp"
                     android:textStyle="bold"
                     tools:text="Crawling"
                      />
@@ -56,8 +56,16 @@
                     android:backgroundTint="@color/colorWhite"
                     android:entries="@array/ages_list"
                     android:gravity="center"
+                     />
+                <View
+                    android:layout_width="240dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorWhite"
                     android:layout_marginEnd="16dp"
-                    android:paddingBottom="16dp" />
+                    android:paddingBottom="16dp"
+                    android:layout_marginBottom="16dp"
+                    />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

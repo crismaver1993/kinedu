@@ -4,7 +4,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorWhite</item>
-        <item name="android:textColorPrimaryInverse">@color/colorBlack</item>
+        <item name="android:textColorPrimaryInverse">@color/colorGrey</item>
         <!-- For the resting Spinner style -->
         <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
         <!-- For each individual Spinner list item once clicked on -->
@@ -16,8 +16,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <!-- For each individual Spinner list item once clicked on -->
+        <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
+    </style>
+    
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+        <!-- For each individual Spinner list item once clicked on -->
+        <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
+    </style>
 
     <style name="GrayCardViewStyle" parent="CardView">
         <item name="cardBackgroundColor">@color/colorGrey</item>
@@ -40,12 +49,13 @@
     <style name="spinnerItemStyle">
         <item name="android:padding">10dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="spinnerDropDownItemStyle">
         <item name="android:textSize">19sp</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorBlueLight</item>
+        <item name="android:background">@color/colorWhite</item>
     </style>
 
     <style name="ProgressDialog" parent="Theme.AppCompat.Dialog.Alert">

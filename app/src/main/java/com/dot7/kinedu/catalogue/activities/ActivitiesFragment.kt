@@ -72,12 +72,7 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
-            if (isOnline(mContext)) {
-                getActivities()
-            } else {
-                noInternet()
-            }
+            getActivities()
         }
     }
 
@@ -85,7 +80,13 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
      * Start consuming webservices
      */
     private fun getActivities() {
-        this@ActivitiesFragment.context?.let { activitiesViewModel.getActivities(it) }
+        this@ActivitiesFragment.context?.let {
+            if (isOnline(it)) {
+                activitiesViewModel.getActivities(it)
+            } else {
+                noInternet()
+            }
+        }
     }
 
     /**
@@ -102,20 +103,24 @@ class ActivitiesFragment : BaseFragment(), OnExerciseListener {
      * Check what kind of renderState it is
      * @param renderState action type to execute
      */
-    private fun updateUI(renderState: Any) {
+    private fun updateUI(renderState: ScreenState<ActivitiesState>) {
         this@ActivitiesFragment.context?.let {
             when (renderState) {
                 is ScreenState.Loading -> {
                     showProgressBar()
                 }
-                is ActivitiesState.ShowActivities -> {
-                    activitiesAdapter.setListInfo(renderState.activities)
-                    dismissProgressBar()
-                }
 
-                is ActivitiesState.ShowInternetAlertRetry -> {
-                    dismissProgressBar()
-                    noInternet()
+                is ScreenState.Render -> {
+                    when (renderState.renderState) {
+                        is ActivitiesState.ShowActivities -> {
+                            activitiesAdapter.setListInfo((renderState.renderState as ActivitiesState.ShowActivities).activities)
+                            dismissProgressBar()
+                        }
+                        is ActivitiesState.ShowInternetAlertRetry -> {
+                            dismissProgressBar()
+                            noInternet()
+                        }
+                    }
                 }
 
                 is ScreenState.ErrorServer -> {

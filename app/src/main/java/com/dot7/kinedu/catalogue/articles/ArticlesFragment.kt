@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dot7.kinedu.BaseActivity
 import com.dot7.kinedu.BaseFragment
+import com.dot7.kinedu.MainActivity
 import com.dot7.kinedu.R
 import com.dot7.kinedu.interfaces.OnExerciseListener
 import com.dot7.kinedu.models.ActivityDataInfo
@@ -35,24 +36,17 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
     private lateinit var rvArticles: RecyclerView
     private lateinit var articlesAdapter: ArticlesAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initAll()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if(articlesAdapter.itemCount<=0){
-            getArticles()
-        }
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_articles, container, false)
-        rootView?.let { initViews(it) }
+        initViews(rootView)
         return rootView
     }
 
@@ -75,7 +69,14 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
             articlesAdapter = ArticlesAdapter(mContext, this)
             rvArticles.setHasFixedSize(true)
             rvArticles.layoutManager = LinearLayoutManager(mContext)
-            articlesAdapter?.let { rvArticles.adapter = it }
+            articlesAdapter.let { rvArticles.adapter = it }
+            getArticles()
+        }
+    }
+
+
+    fun refreshData() {
+        if (articlesAdapter.itemCount <= 0) {
             getArticles()
         }
     }
@@ -166,10 +167,10 @@ class ArticlesFragment : BaseFragment(), OnExerciseListener {
      * Show Snack bar to notify the user about no internet connection
      */
     private fun noInternet() {
-        (activity as BaseActivity)?.showSnackError(
+        (activity as BaseActivity).showSnackError(
             R.string.msg_no_internet_error,
             R.string.label_retry,
-            View.OnClickListener { getArticles() })
+            View.OnClickListener { (activity as MainActivity).reloadFragments()})
     }
 
     override fun showActivityDetail(activityInfo: ActivityDataInfo) {

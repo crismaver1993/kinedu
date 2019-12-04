@@ -1,9 +1,8 @@
 package com.dot7.kinedu.catalogue.articles
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.dot7.kinedu.models.KineduActivityResponse
+import com.dot7.kinedu.models.KineduArticleDetailResponse
 import com.dot7.kinedu.models.KineduArticleResponse
 import com.dot7.kinedu.network.KineduClient
 import com.dot7.kinedu.network.KineduService
@@ -65,6 +64,42 @@ class ArticlesRepository(val context: Context) {
                     }
                 } else {
                     articlesState.value = ScreenState.ErrorServer
+                }
+            }
+        }
+    }
+
+    fun getArticleDetail(mContext: Context, idAccount: String) {
+        val call = apiService?.getArticleDetail(
+            KineduConstants.TOKEN,
+            idAccount
+        )
+        articlesState.value = ScreenState.Loading
+        call?.enqueue(object : Callback<KineduArticleDetailResponse> {
+            override fun onFailure(call: Call<KineduArticleDetailResponse>, t: Throwable) {
+                articlesState.value = ScreenState.ErrorServer
+            }
+
+            override fun onResponse(
+                call: Call<KineduArticleDetailResponse>,
+                response: Response<KineduArticleDetailResponse>
+            ) {
+                showDetailInfo(mContext, response)
+            }
+        })
+    }
+
+    /**
+     * Show text info
+     * @param response answer from service
+     */
+     fun showDetailInfo(mContext: Context,response: Response<KineduArticleDetailResponse>) {
+        mContext.let {
+            if (response.isSuccessful) {
+                val body = response.body()
+                body?.let {
+                    articlesState.value =
+                        ScreenState.Render(ArticlesState.ShowArticleDetail(it))
                 }
             }
         }

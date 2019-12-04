@@ -16,4 +16,8 @@ class ArticlesViewModel(app: Application)  : AndroidViewModel(app) {
     fun getArticles(mContext: Context) {
         repository.getArticles(mContext)
     }
+
+    fun getArtcileDetail(mContext: Context, idAccount: String){
+        repository.getArticleDetail(mContext, idAccount)
+    }
 }
